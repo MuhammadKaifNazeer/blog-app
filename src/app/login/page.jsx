@@ -1,6 +1,6 @@
 import styles from './loginPage.module.css'
 
-const loginPage = () => {
+const LoginPage = () => {
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -12,4 +12,4 @@ const loginPage = () => {
     )
 }
 
-export default loginPage
+export default LoginPage
