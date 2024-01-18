@@ -12,6 +12,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.bubble.css";
 
 const WritePage = () => {
   const { status } = useSession();
@@ -47,7 +50,7 @@ const WritePage = () => {
               break;
           }
         },
-        (error) => { },
+        (error) => {},
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setMedia(downloadURL);
@@ -83,7 +86,7 @@ const WritePage = () => {
         desc: value,
         img: media,
         slug: slugify(title),
-        catSlug: catSlug || "style",
+        catSlug: catSlug || "style", 
       }),
     });
 
@@ -134,19 +137,19 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <textarea
+        <ReactQuill
           className={styles.textArea}
           theme="bubble"
           value={value}
           onChange={setValue}
           placeholder="Tell your story..."
-        ></textarea>
+        />
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
       </button>
     </div>
-  );
+  );  
 };
 
 export default WritePage;
