@@ -3,7 +3,6 @@
 import Image from "next/image";
 import styles from "./writePage.module.css";
 import { useEffect, useState } from "react";
-import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {
@@ -13,7 +12,6 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
-import ReactQuill from "react-quill";
 
 const WritePage = () => {
   const { status } = useSession();
@@ -49,7 +47,7 @@ const WritePage = () => {
               break;
           }
         },
-        (error) => {},
+        (error) => { },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setMedia(downloadURL);
@@ -85,7 +83,7 @@ const WritePage = () => {
         desc: value,
         img: media,
         slug: slugify(title),
-        catSlug: catSlug || "style", 
+        catSlug: catSlug || "style",
       }),
     });
 
@@ -136,19 +134,19 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <ReactQuill
+        <textarea
           className={styles.textArea}
           theme="bubble"
           value={value}
           onChange={setValue}
           placeholder="Tell your story..."
-        />
+        ></textarea>
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
       </button>
     </div>
-  );  
+  );
 };
 
 export default WritePage;
