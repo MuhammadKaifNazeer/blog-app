@@ -5,11 +5,11 @@ import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-const apiUrl = process.env.API_URL;
+// const apiUrl = process.env.API_URL;
 
 const getData = async () => {
   try {
-    const res = await fetch(`${apiUrl}/api/categories`, {
+    const res = await fetch(`https://blogvarse.vercel.app/api/categories`, {
       cache: "no-store",
     });
 
@@ -20,7 +20,6 @@ const getData = async () => {
     return res.json();
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Handle the error appropriately, e.g., display an error message to the user
     return [];
   }
 };
