@@ -7,34 +7,33 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
+// const apiUrl = process.env.API_URL;
 
 const fetcher = async (url) => {
     const res = await fetch(url);
-    
+
     const data = await res.json();
-    
+
     if (!res.ok) {
         const error = new Error(data.message);
         throw error;
     }
-    
+
     return data;
 };
 
 const Comments = ({ postSlug }) => {
-    const apiUrl = process.env.API_URL;
-    
     const { status } = useSession();
 
     const { data, mutate, isLoading } = useSWR(
-        `${apiUrl}/comments?postSlug=${postSlug}`,
+        `https://blogvarse.vercel.app/api/comments?postSlug=${postSlug}`,
         fetcher
     );
 
     const [desc, setDesc] = useState("");
 
     const handleSubmit = async () => {
-        await fetch("/comments", {
+        await fetch("/api/comments", {
             method: "POST",
             body: JSON.stringify({ desc, postSlug }),
         });
