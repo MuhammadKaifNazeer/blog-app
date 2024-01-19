@@ -7,22 +7,23 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-const apiUrl = process.env.API_URL;
 
 const fetcher = async (url) => {
     const res = await fetch(url);
-
+    
     const data = await res.json();
-
+    
     if (!res.ok) {
         const error = new Error(data.message);
         throw error;
     }
-
+    
     return data;
 };
 
 const Comments = ({ postSlug }) => {
+    const apiUrl = process.env.API_URL;
+    
     const { status } = useSession();
 
     const { data, mutate, isLoading } = useSWR(
