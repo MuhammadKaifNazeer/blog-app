@@ -7,7 +7,7 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-const apiUrl = process.env.API_URL;
+// const apiUrl = process.env.API_URL;
 
 const fetcher = async (url) => {
     const res = await fetch(url);
@@ -26,7 +26,7 @@ const Comments = ({ postSlug }) => {
     const { status } = useSession();
 
     const { data, mutate, isLoading } = useSWR(
-        `${apiUrl}/api/comments?postSlug=${postSlug}`,
+        `https://blogvarse.vercel.app/api/comments?postSlug=${postSlug}`,
         fetcher
     );
 
